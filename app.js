@@ -3,7 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-const helmet = require('helmet');
+const session = require('express-session');
 
 const userRouter = require('./routes/userRoutes');
 const noteRouter = require('./routes/noteRoutes');
@@ -41,6 +41,22 @@ const corsConfig = {
 
 app.use(cors(corsConfig));
 app.options('*', cors(corsConfig));
+// Trust proxy
+app.set('trust proxy', 1);
+app.use(
+  session({
+    name: 'random_session',
+    secret: 'yryGGeugidx34otGDuSF5sD9R8g0Gü3r8',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      path: '/',
+      secure: true,
+      // domain: '.firebaseapp.com',
+      httpOnly: true,
+    },
+  })
+);
 
 // app.use(helmet.crossOriginResourcePolicy({ policy: 'same-site' }));
 // app.use(
