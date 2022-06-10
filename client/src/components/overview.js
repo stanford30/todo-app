@@ -31,18 +31,20 @@ const Note = (props) => {
 
 export const OverView = (props) => {
   const [notes, setNotes] = useState([]);
-  let greeting = (
-    <>
-      <h3>Hello from the overview</h3>
-      <h3>Try: username: test@example.com password: test1234</h3>
-    </>
-  );
+  let greeting;
 
   if (props.user) {
     const firstname = JSON.parse(localStorage.getItem('user')).name.split(
       ' '
     )[0];
     greeting = <h3>Hello {firstname}</h3>;
+  } else {
+    greeting = (
+      <>
+        <h3>Hello from the overview</h3>
+        <h3>Try: username: test@example.com password: test1234</h3>
+      </>
+    );
   }
 
   const getUserNotes = async () => {
