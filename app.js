@@ -10,6 +10,9 @@ const noteRouter = require('./routes/noteRoutes');
 const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
+
+app.enable('trust proxy');
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
