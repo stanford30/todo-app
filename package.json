@@ -20,6 +20,9 @@
     "start:dev": "nodemon server.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
+  "engines": {
+    "node": "17.3.0"
+  },
   "author": "Stanley Zheng",
   "license": "ISC",
   "description": "Todo App"
