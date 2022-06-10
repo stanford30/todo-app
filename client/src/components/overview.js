@@ -3,25 +3,25 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 // import Cookies from 'js-cookie';
 // import { Cookies, useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Note = (props) => {
+  let navigate = useNavigate();
+
+  const routeChange = (e) => {
+    console.log(e.target.closest('.note').dataset.id);
+    let id = e.target.closest('.note').dataset.id;
+    let path = `/update/${id}`;
+    navigate(path);
+  };
   return (
-    <div className="note">
+    <div className="note" data-id={props.note._id}>
       <div className="note-body">
         <p className="card-text">{props.note.note}</p>
-        <button
-          className="btn btn-danger"
-          // id={props.note._id}
-          onClick={props.handleDelete}
-          data-id={props.note._id}
-        >
+        <button className="btn btn-danger" onClick={props.handleDelete}>
           Delete
         </button>
-        <button
-          className="btn btn-primary"
-          id={props.note._id}
-          // onClick={props.handleDelete}
-        >
+        <button className="btn btn-primary" onClick={routeChange}>
           Update
         </button>
       </div>
@@ -31,7 +31,15 @@ const Note = (props) => {
 
 export const OverView = (props) => {
   const [notes, setNotes] = useState([]);
-  // console.log(props._locals);
+  let greeting;
+
+  if (props.user) {
+    const firstname = JSON.parse(localStorage.getItem('user')).name.split(
+      ' '
+    )[0];
+    greeting = <h3>Hello {firstname}</h3>;
+  }
+
   const getUserNotes = async () => {
     const res = await axios({
       method: 'GET',
@@ -41,25 +49,18 @@ export const OverView = (props) => {
     const notes = res.data.user.notes;
     setNotes(notes);
   };
+
   useEffect(() => {
-    // const getNotes = async () => {
-    //   const res = await axios({
-    //     method: 'GET',
-    //     withCredentials: true,
-
-    //     url: `http://localhost:3000/api/v1/users/${props.user.id}`,
-    //   });
-    //   const notes = res.data.user.notes;
-    //   setNotes(notes);
-    // };
-
     if (props.user) getUserNotes();
   }, []);
 
   const handleDelete = async (e) => {
+    // console.log(e.target.closest('.note').dataset.id);
     await axios({
       method: 'DELETE',
-      url: `http://localhost:3000/api/v1/notes/${e.target.dataset.id}`,
+      url: `http://localhost:3000/api/v1/notes/${
+        e.target.closest('.note').dataset.id
+      }`,
       withCredentials: true,
     });
     // window.location.reload(true);
@@ -73,7 +74,7 @@ export const OverView = (props) => {
   if (!props.user) return;
   return (
     <div className="overview-container">
-      <h3>Hello from overview</h3>
+      {greeting}
       <div className="note-container">{noteList()}</div>
     </div>
   );

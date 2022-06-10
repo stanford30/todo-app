@@ -4,11 +4,17 @@ import { NavLink } from 'react-router-dom';
 
 export const Navbar = (props) => {
   let button;
+  let createButton;
   if (!props.isLoggedIn) {
     button = (
-      <NavLink className="nav-link" href="#" to="/login">
-        Log in
-      </NavLink>
+      <>
+        <NavLink className="nav-link" href="#" to="/login">
+          Log in
+        </NavLink>
+        <NavLink className="nav-link" href="#" to="/signup">
+          Sign up
+        </NavLink>
+      </>
     );
   } else {
     button = (
@@ -16,6 +22,11 @@ export const Navbar = (props) => {
       <a className="nav-link" href="#" onClick={props.handleLogOut}>
         Log Out
       </a>
+    );
+    createButton = (
+      <NavLink className="nav-link" to="/create">
+        Create Note
+      </NavLink>
     );
   }
   return (
@@ -26,10 +37,7 @@ export const Navbar = (props) => {
             <NavLink className="nav-link active" aria-current="page" to="/">
               Home
             </NavLink>
-
-            <NavLink className="nav-link" to="/create">
-              Create Note
-            </NavLink>
+            {createButton}
           </div>
           <div className="navbar-nav ms-auto">{button}</div>
         </div>

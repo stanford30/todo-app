@@ -73,7 +73,6 @@ const login = async (email, password) => {
       window.setTimeout(() => {
         window.location.assign('/');
       }, 1500);
-      console.log(res.data);
     }
   } catch (err) {
     console.log(err);

@@ -4,7 +4,9 @@ import { React, useState } from 'react';
 import { Route, Routes, useResolvedPath } from 'react-router-dom';
 import { OverView } from './components/overview';
 import { Login } from './components/login';
+import { Signup } from './components/signup';
 import { Create } from './components/createNote';
+import { Update } from './components/updateNote';
 import { Navbar } from './components/navbar';
 import { showAlert } from './components/login';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -24,6 +26,9 @@ function App() {
     });
     if (res.data.status === 'success') {
       showAlert('success', 'Logged out successfully!');
+      window.setTimeout(() => {
+        window.location.assign('/');
+      }, 500);
     }
   };
 
@@ -35,7 +40,9 @@ function App() {
         <Route exact path="/" element={<OverView user={user} />} />
         {/* <Route exact path="/" element={<OverView />} /> */}
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/Create" element={<Create />} />
+        <Route path="/update/:id" element={<Update />} />
       </Routes>
     </div>
   );

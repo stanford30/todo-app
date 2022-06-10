@@ -51,4 +51,12 @@ exports.deleteNote = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
-exports.getNote = catchAsync(async (req, res, next) => {});
+
+exports.getNote = catchAsync(async (req, res, next) => {
+  const note = await Note.findById(req.params.id);
+
+  res.status(200).json({
+    status: 'success',
+    note,
+  });
+});
