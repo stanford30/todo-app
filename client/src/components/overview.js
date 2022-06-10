@@ -42,7 +42,8 @@ export const OverView = (props) => {
     greeting = (
       <>
         <h3>Hello from the overview</h3>
-        <h3>Try: username: test@example.com password: test1234</h3>
+        <h3>Try: username: test@example.com </h3>
+        <h3>password: test1234</h3>
       </>
     );
   }
@@ -76,7 +77,7 @@ export const OverView = (props) => {
       return <Note note={note} key={note._id} handleDelete={handleDelete} />;
     });
   };
-  if (!props.user) return { greeting };
+  if (!props.user) return <div className="overview-container">{greeting}</div>;
   return (
     <div className="overview-container">
       {greeting}
