@@ -32,7 +32,7 @@ export const Create = () => {
     const note = document.querySelector('#note').value;
     const res = await axios({
       method: 'POST',
-      url: `http://localhost:3000/api/v1/notes/`,
+      url: `/api/v1/notes/`,
       data: { note },
       withCredentials: true,
     });

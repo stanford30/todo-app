@@ -31,7 +31,12 @@ const Note = (props) => {
 
 export const OverView = (props) => {
   const [notes, setNotes] = useState([]);
-  let greeting = <h3>Hello from the overview</h3>;
+  let greeting = (
+    <>
+      <h3>Hello from the overview</h3>
+      <h3>Try: username: test@example.com password: test1234</h3>
+    </>
+  );
 
   if (props.user) {
     const firstname = JSON.parse(localStorage.getItem('user')).name.split(
@@ -44,7 +49,7 @@ export const OverView = (props) => {
     const res = await axios({
       method: 'GET',
       withCredentials: true,
-      url: `http://localhost:3000/api/v1/users/${props.user.id}`,
+      url: `/api/v1/users/${props.user.id}`,
     });
     const notes = res.data.user.notes;
     setNotes(notes);
@@ -58,9 +63,7 @@ export const OverView = (props) => {
     // console.log(e.target.closest('.note').dataset.id);
     await axios({
       method: 'DELETE',
-      url: `http://localhost:3000/api/v1/notes/${
-        e.target.closest('.note').dataset.id
-      }`,
+      url: `/api/v1/notes/${e.target.closest('.note').dataset.id}`,
       withCredentials: true,
     });
     // window.location.reload(true);

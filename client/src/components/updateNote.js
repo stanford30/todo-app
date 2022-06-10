@@ -37,7 +37,7 @@ export const Update = () => {
   const getNote = async () => {
     const res = await axios({
       method: 'GET',
-      url: `http://localhost:3000/api/v1/notes/${id}`,
+      url: `/api/v1/notes/${id}`,
       withCredentials: true,
     });
     setNoteValue(res.data.note.note);
@@ -58,7 +58,7 @@ export const Update = () => {
 
       const res = await axios({
         method: 'patch',
-        url: `http://localhost:3000/api/v1/notes/${id}`,
+        url: `/api/v1/notes/${id}`,
         data: { note },
         withCredentials: true,
       });
