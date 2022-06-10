@@ -76,7 +76,7 @@ export const OverView = (props) => {
       return <Note note={note} key={note._id} handleDelete={handleDelete} />;
     });
   };
-  if (!props.user) return;
+  if (!props.user) return { greeting };
   return (
     <div className="overview-container">
       {greeting}
