@@ -31,7 +31,7 @@ const Note = (props) => {
 
 export const OverView = (props) => {
   const [notes, setNotes] = useState([]);
-  let greeting;
+  let greeting = <h3>Hello from the overview</h3>;
 
   if (props.user) {
     const firstname = JSON.parse(localStorage.getItem('user')).name.split(
