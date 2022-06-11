@@ -13,7 +13,7 @@ const app = express();
 
 app.enable('trust proxy');
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Baody parser, reading data from body into req.body
